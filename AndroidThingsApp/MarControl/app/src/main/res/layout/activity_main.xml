@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:stream="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingTop="6dp"
+    tools:context="com.potatomars.chimpcode.marcontrol.MainActivity"
+    android:layout_margin="0dp"
+    android:weightSum="1"
+    android:padding="6dp">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="195dp"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_o2_symbol_in_a_cloud"
+            android:id="@+id/imageView3"
+            android:layout_weight="0.28"
+            android:weightSum="1"
+            android:layout_margin="0dp"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="0dp"
+            android:padding="0dp"
+            android:paddingBottom="0dp"
+            android:paddingLeft="0dp"
+            android:paddingEnd="0dp"
+            android:paddingRight="0dp"
+            android:paddingStart="0dp"
+            android:paddingTop="0dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView"
+            android:layout_weight="0.08"
+            android:text="Nivel de oxigeno (%ppm)"
+            android:gravity="center_vertical|center_horizontal|center" />
+
+        <TextView
+            android:text="1 %ppm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtOxigeno"
+            android:layout_weight="0.11"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Switch
+            android:text="Valvula O2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnO2"
+            android:layout_weight="0.05"
+            android:paddingRight="15dp"
+            android:paddingLeft="20dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.13" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_thermometer_a"
+            android:id="@+id/imageView4"
+            android:layout_weight="0.25" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView3"
+            android:layout_weight="0.06"
+            android:text="Temperatura (°C)"
+            android:gravity="center_vertical|center_horizontal|center" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="195dp"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_margin="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:padding="0dp"
+        android:paddingBottom="0dp"
+        android:paddingLeft="0dp"
+        android:paddingEnd="0dp"
+        android:paddingRight="0dp"
+        android:paddingStart="0dp"
+        android:paddingTop="0dp"
+        android:layout_weight="0.01">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_co2_cloud"
+            android:id="@+id/imageView2"
+            android:layout_weight="0.45"
+            android:layout_margin="0dp"
+            android:padding="0dp" />
+
+        <TextView
+            android:text="Nivel de CO2 (%ppm)"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView2"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:layout_weight="0.12" />
+
+        <TextView
+            android:text="93 %ppm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/txtDioxido"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:textSize="20sp"
+            android:layout_weight="0.17"
+            android:textStyle="bold" />
+
+        <Switch
+            android:text="Valvula CO2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnCO2"
+            android:layout_weight="0.07"
+            android:paddingRight="15dp"
+            android:paddingLeft="20dp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="163dp"
+            android:layout_weight="0.14">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Sensor 1:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView15"
+                    android:padding="10dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="15 °C"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txtT1"
+                    android:paddingLeft="25dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:gravity="center_vertical|center_horizontal|center"
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Sensor 2:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView16"
+                    android:layout_weight="1"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:text="5 °C"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txtT2"
+                    android:layout_weight="1"
+                    android:paddingLeft="25dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:gravity="center_vertical|center_horizontal|center"
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:text="Sensor 3:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView17"
+                    android:layout_weight="1"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:text="-1 °C"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:id="@+id/txtT3"
+                    android:layout_weight="1"
+                    android:paddingLeft="25dp"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:gravity="center_vertical|center_horizontal|center"
+                    android:textSize="14sp"
+                    android:textStyle="normal|bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:text="TEMPERATURA GLOBAL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView25"
+                    android:padding="10dp"
+                    android:gravity="center_vertical|center_horizontal|center" />
+
+                <TextView
+                    android:text="6.3 °C"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtTFinal"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:padding="5dp"
+                    android:gravity="center_vertical|center_horizontal|center" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:weightSum="1"
+        android:layout_weight="0.95"
+        android:gravity="bottom">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="0.32" />
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/chart2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="0.31" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.25"
+            android:layout_marginTop="15dp">
+
+            <ImageView
+                android:layout_width="168dp"
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_pressure2"
+                android:id="@+id/imageView5" />
+
+            <Switch
+                android:text="Valvula de vacio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/btnVacuum"
+                android:layout_weight="1"
+                android:paddingRight="15dp"
+                android:paddingLeft="20dp"
+                android:gravity="center_vertical|center_horizontal|start"
+                android:textSize="18sp"
+                android:textColor="?android:attr/textColorTertiary" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="1">
+
+            <TextView
+                android:text="Parametros esperados:"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView28"
+                android:layout_weight="0.23"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:textStyle="normal|bold" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.23"
+                android:layout_marginLeft="15dp">
+
+                <TextView
+                    android:text="Nivel de oxigeno:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView29"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
+
+                <TextView
+                    android:text="5 %ppm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtEspO2"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.23"
+                android:layout_marginLeft="15dp">
+
+                <TextView
+                    android:text="Nivel de dioxido de carbono:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView31"
+                    android:layout_weight="0.66"
+                    android:gravity="center_vertical|center_horizontal" />
+
+                <TextView
+                    android:text="95 %ppm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtEspCo2"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.23"
+                android:layout_marginLeft="15dp">
+
+                <TextView
+                    android:text="Nivel de Temperatura:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView33"
+                    android:layout_weight="0.74"
+                    android:gravity="center_vertical|center_horizontal" />
+
+                <TextView
+                    android:text="0 °C"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtEspTemp"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|center_horizontal" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.05"
+            android:gravity="bottom">
+
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1.90" />
+
+            <Button
+                android:text="CONFIGURAR PARAMETROS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnConfig"
+                android:layout_weight="1"
+                android:elevation="4dp"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored" />
+
+            <Space
+                android:layout_height="match_parent"
+                android:layout_weight="0.08"
+                android:layout_width="wrap_content" />
+
+            <Button
+                android:text="AUTOMATIZAR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnAuto"
+                android:layout_weight="1"
+                style="@style/Widget.AppCompat.Button.Colored" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.48" />
+
+        </LinearLayout>
+
+        <ProgressBar
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:indeterminate="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/prgBar"
+            android:layout_gravity="bottom"
+            android:layout_margin="0dp" />
+
+    </LinearLayout>
+</LinearLayout>
