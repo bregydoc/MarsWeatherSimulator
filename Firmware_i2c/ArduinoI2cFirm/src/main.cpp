@@ -5,7 +5,6 @@
 
 //#define DEBUG_MODE
 
-
 void receiveEvent(int howMany);
 void requestEvent();
 void refreshO2AndC02();
