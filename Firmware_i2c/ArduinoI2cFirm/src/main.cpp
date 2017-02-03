@@ -1,8 +1,10 @@
 #include "Arduino.h"
 #include <Wire.h>
 
-
 //Es necesario modificar el archivo Wire.h, ya que este admite un buffer máximo de 32 bytes
+
+//#define DEBUG_MODE
+
 
 void receiveEvent(int howMany);
 void requestEvent();
@@ -29,6 +31,8 @@ void initAllSensors() {
     }
     pinMode(LED_BUILTIN, OUTPUT);
     Serial1.begin(9600);
+    Serial1.write("M 1\r\n");
+
     Serial2.begin(9600);
 
 }
@@ -37,8 +41,11 @@ void initAllSensors() {
 void setup() {
     Wire.begin(8);
     initAllSensors();
-    randomSeed(analogRead(6));
-
+    //randomSeed(analogRead(6
+    #ifdef DEBUG_MODE
+    Serial.begin(9600);
+    Serial.println("Debug mode actived, system ready.");
+    #endif
 
     Wire.onReceive(receiveEvent);
     Wire.onRequest(requestEvent);
@@ -88,11 +95,34 @@ void requestEvent() {
 
 void refreshO2AndC02() {
     //Refresh current value of CO2 and O2
-    float co2Random = random(50,100);
-    float o2Random = random(5,100-co2Random);
+    Serial1.write("%\r\n");
+    String rawO2 = Serial1.readString();
+    Serial1.flush();
+    String o2String = rawO2.substring(2, 8);
 
-    O2ppm = o2Random;
-    CO2ppm = co2Random;
+    #ifdef DEBUG_MODE
+    Serial.println("Raw o2: " + rawO2);
+    #endif
+    //Invertido
+    CO2ppm = o2String.toFloat();
+
+    Serial2.write("z\r\n");
+    String rawCO2 = Serial2.readString();
+    Serial2.flush();
+
+    String co2String = rawCO2.substring(2, 8);
+
+    #ifdef DEBUG_MODE
+    Serial.println("Raw co2: " + rawCO2);
+    #endif
+    //Invertido
+    O2ppm = (co2String.toFloat())/100.0;
+
+    // float co2Random = random(50,100);
+    // float o2Random = random(5,100-co2Random);
+    //
+    // O2ppm = o2Random;
+    // CO2ppm = co2Random;
 
 }
 
@@ -100,7 +130,6 @@ void refreshTemperatureSensors() {
     for (int i=0;i<3;i++) {
         temperatureValues[i] = (((analogRead(temperatureSensorsPins[i])/4096.0)*330) - 0.5);
     }
-
 
 }
 
