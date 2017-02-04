@@ -1,5 +1,7 @@
 #include "Arduino.h"
 #include <Wire.h>
+#include <OneWire.h>
+#include <DallasTemperature.h>
 
 //Es necesario modificar el archivo Wire.h, ya que este admite un buffer máximo de 32 bytes
 
@@ -21,14 +23,28 @@ int stateRequest = 0;
 
 
 int temperatureSensorsPins[3] = {A0, A1, A2};
+int temperatureDigitalPins[3] = {5, 6, 7};
 int utilLeds[4] = {46, 48, 50, 52};
 
+// =========================== One wire interface =======================
+OneWire temp1PinConnection(temperatureDigitalPins[0]);
+DallasTemperature temp1Interface(&temp1PinConnection);
+
+OneWire temp2PinConnection(temperatureDigitalPins[1]);
+DallasTemperature temp2Interface(&temp2PinConnection);
+
+OneWire temp3PinConnection(temperatureDigitalPins[2]);
+DallasTemperature temp3Interface(&temp3PinConnection);
+
+
+// =========================== =================  =======================
 
 void initAllSensors() {
     for (int i = 0; i < 3; i++) {
         pinMode(temperatureSensorsPins[i], OUTPUT);
     }
     pinMode(LED_BUILTIN, OUTPUT);
+
     Serial1.begin(9600);
     Serial1.write("M 1\r\n");
 
@@ -126,10 +142,18 @@ void refreshO2AndC02() {
 }
 
 void refreshTemperatureSensors() {
+    /*
     for (int i=0;i<3;i++) {
         temperatureValues[i] = (((analogRead(temperatureSensorsPins[i])/4096.0)*330) - 0.5);
     }
+    */
+    temp1Interface.requestTemperatures();
+    temp2Interface.requestTemperatures();
+    temp3Interface.requestTemperatures();
 
+    temperatureValues[0] = temp1Interface.getTempCByIndex(0);
+    temperatureValues[1] = temp2Interface.getTempCByIndex(0);
+    temperatureValues[2] = temp3Interface.getTempCByIndex(0);
 }
 
 
