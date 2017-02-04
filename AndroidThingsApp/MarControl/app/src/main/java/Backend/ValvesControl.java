@@ -77,7 +77,7 @@ public class ValvesControl {
 
     public void openVacuumValve() {
         try {
-            valveVacuum.setValue(false);
+            valveVacuum.setValue(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,7 +85,7 @@ public class ValvesControl {
 
     public void closeVacuumValve() {
         try {
-            valveVacuum.setValue(true);
+            valveVacuum.setValue(false);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -184,7 +184,7 @@ public class ValvesControl {
                 if (isChecked) {
                     openVacuumValve();
                 }else{
-                    openVacuumValve();
+                    closeVacuumValve();
                 }
             }
         });
