@@ -2,8 +2,10 @@ package com.potatomars.chimpcode.marcontrol;
 
 import android.app.Activity;
 import android.graphics.Color;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.format.Formatter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -11,7 +13,10 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import Backend.AlgorithmControl;
 import Backend.ChartsControl;
 import Backend.DialogControl;
 import Backend.MarsI2cControl;
@@ -55,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        //DatabaseReference myRef = database.getReference("message");
+
+        WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
+        String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+        System.out.println("IP: " + ip);
+
+
+
         valvesControl = new ValvesControl("BCM5", "BCM6", "BCM16");
 
 
@@ -66,7 +80,9 @@ public class MainActivity extends AppCompatActivity {
         txtT1 = (TextView) findViewById(R.id.txtT1);
         txtT2 = (TextView) findViewById(R.id.txtT2);
         txtT3 = (TextView) findViewById(R.id.txtT3);
+
         txtGlobaltemp = (TextView) findViewById(R.id.txtTFinal);
+
         txtCO2 = (TextView) findViewById(R.id.txtDioxido);
         txtO2 = (TextView) findViewById(R.id.txtOxigeno);
 
@@ -142,15 +158,10 @@ public class MainActivity extends AppCompatActivity {
             btnAuto.setText("DETENER");
             btnAuto.setTextAppearance(R.style.btnDetener);
             progressBar.setVisibility(View.VISIBLE);
-
+            AlgorithmControl algorithmControl = new AlgorithmControl(valvesControl, marsControl);
+            algorithmControl.runBasicAlgorithm(valvesControl, marsControl, true);
 
         }
-
-
-
-
-
-
 
 
 
