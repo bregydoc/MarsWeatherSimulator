@@ -1,11 +1,9 @@
 package com.potatomars.chimpcode.marcontrol;
 
 import android.app.Activity;
-import android.graphics.Color;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.format.Formatter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -13,8 +11,9 @@ import android.widget.Switch;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Pattern;
 
 import Backend.AlgorithmControl;
 import Backend.ChartsControl;
@@ -64,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
         //DatabaseReference myRef = database.getReference("message");
 
         WifiManager wm = (WifiManager) getSystemService(WIFI_SERVICE);
-        String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
-        System.out.println("IP: " + ip);
+        //String ip = Formatter.formatIpAddress(wm.getConnectionInfo().getIpAddress());
+        //System.out.println("IP: " + ip);
 
 
 
@@ -158,7 +157,13 @@ public class MainActivity extends AppCompatActivity {
             btnAuto.setText("DETENER");
             btnAuto.setTextAppearance(R.style.btnDetener);
             progressBar.setVisibility(View.VISIBLE);
+
             AlgorithmControl algorithmControl = new AlgorithmControl(valvesControl, marsControl);
+
+            float finalO2 = Float.parseFloat((((TextView) (this.findViewById(R.id.txtEspO2))).getText().toString().split(Pattern.quote("%")))[0].trim());
+            float finalCO2 = Float.parseFloat((((TextView) (this.findViewById(R.id.txtEspCo2))).getText().toString().split(Pattern.quote("%")))[0].trim());
+
+            algorithmControl.setExpectedValues(0, finalO2, finalCO2);
             algorithmControl.runBasicAlgorithm(valvesControl, marsControl, true);
 
         }

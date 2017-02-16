@@ -19,8 +19,14 @@ public class DialogControl {
     TextView txtSelecO2;
     TextView txtSelecCO2;
     TextView txtSelecTemp;
-    public DialogControl(Activity activity){
 
+    public float rawCO2;
+    public float rawO2;
+
+
+    public DialogControl(Activity activity){
+        rawCO2 = 0;
+        rawO2 = 0;
 
         MaterialDialog configDialog = new MaterialDialog.Builder(activity)
                 .title("Configuracion de parametros")
@@ -43,6 +49,7 @@ public class DialogControl {
                         txtCO2.setText(txtSelecCO21.getText());
                         txtTemp.setText(txtSelecTemp1.getText());
 
+
                     }
                 })
                 .show();
@@ -57,6 +64,7 @@ public class DialogControl {
         sckO2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                rawO2 = progress;
                 txtSelecO2.setText(String.valueOf(progress) + " %ppm");
             }
 
@@ -75,6 +83,7 @@ public class DialogControl {
         sckCO2.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                rawCO2 = progress;
                 txtSelecCO2.setText(String.valueOf(progress) + " %ppm");
 
             }
