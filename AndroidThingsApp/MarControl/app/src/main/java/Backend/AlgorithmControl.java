@@ -38,7 +38,7 @@ public class AlgorithmControl {
             valvesControl.openVacuumValve();
             while (dco2 < 0) {
                 if (debugMode) {
-                    System.out.println("Waiting while oxygen diff is lower than 0");
+                    System.out.println("Waiting while oxygen diff is lower than 0" + "\tCurrent dco2: " + String.valueOf(dco2));
                 }
                 dco2 = expectedCo2 - marsI2cControl.getCo2();
             }
@@ -51,7 +51,7 @@ public class AlgorithmControl {
             valvesControl.openCO2Valve();
             while (do2 < 0) {
                 if (debugMode) {
-                    System.out.println("Waiting while carbon dioxide diff is lower than 0");
+                    System.out.println("Waiting while carbon dioxide diff is lower than 0" + "\tCurrent do2: " + String.valueOf(do2));
                 }
                 do2 = expectedO2 - marsI2cControl.getO2();
             }

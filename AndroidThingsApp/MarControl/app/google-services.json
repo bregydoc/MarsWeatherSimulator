@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "502233997386",
+    "firebase_url": "https://marsutec.firebaseio.com",
+    "project_id": "marsutec",
+    "storage_bucket": "marsutec.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502233997386:android:93dc20ec7df967ae",
+        "android_client_info": {
+          "package_name": "com.potatomars.chimpcode.marcontrol"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502233997386-ckl9bn34jrtj74ilok0j3v5of4q4tmat.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuzT8tudZ0MJDEsqcw5V1MBMwn7WGAJZ0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
