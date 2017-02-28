@@ -113,7 +113,7 @@ public class MarsI2cControl {
 
 
     public void putValuesInTextViews(TextView t1, TextView t2, TextView t3, TextView co2, TextView o2, TextView gTemp) {
-        t1.setText(String.format("%.2f", getT1()) + " °C");
+            t1.setText(String.format("%.2f", getT1()) + " °C");
         t2.setText(String.format("%.2f", getT2()) + " °C");
         t3.setText(String.format("%.2f", getT3()) + " °C");
 

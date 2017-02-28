@@ -9,18 +9,22 @@
 
 
 //Control for NeoPixels:------------------------------------------------------------
-#define PIN 6
-#define NUMPIXELS 30
+#define PIN 9
+#define NUMPIXELS 40
 Adafruit_NeoPixel pixels = Adafruit_NeoPixel(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 //----------------------------------------------------------------------------------
 
-
+#define co2Sensor Serial2
+#define o2Sensor Serial1
 //#define DEBUG_MODE
 
 void receiveEvent(int howMany);
 void requestEvent();
 void refreshO2AndC02();
 void refreshTemperatureSensors();
+void refreshTemperatureFromO2Sensor();
+void refreshTemperatureFromCO2Sensor();
+
 char *floatToString1(char *outstr, double val, byte precision, byte widthp);
 char *floatToString2(char *outstr, float value, int places, int minwidth, bool rightjustify);
 
@@ -32,7 +36,11 @@ void setBrightness(int bright);
 float O2ppm = 0.0;
 float CO2ppm = 0.0;
 float temperatureValues[3] = {0.0, 0.0, 0.0};
-float humidity = 0.0;
+
+float tempFromCO2Sensor = 0.0;
+float tempFromO2Sensor = 0.0;
+float humidityFromCO2Sensor = 0.0;
+float pressureFromCO2Sensor = 0.0;
 
 int stateRequest = 0;
 
@@ -59,10 +67,10 @@ void initAllSensors() {
     }
     pinMode(LED_BUILTIN, OUTPUT);
 
-    Serial1.begin(9600);
-    Serial1.write("M 1\r\n");
+    o2Sensor.begin(9600);
+    o2Sensor.write("M 1\r\n");
 
-    Serial2.begin(9600);
+    co2Sensor.begin(9600);
 }
 
 void setup() {
@@ -80,14 +88,21 @@ void setup() {
     pixels.begin();
     //ONLY TEST
     //pixels.setBrightness(10);
-    setMeshTwoColors(pixels.Color(220,10,170), pixels.Color(12, 120, 90));
+    //setMeshTwoColors(pixels.Color(255,0,0), pixels.Color(0, 0, 255));
+    setMeshTwoColors(pixels.Color(0, 0, 0), pixels.Color(0, 0, 0));
 }
 
 void loop() {
     refreshO2AndC02();
     refreshTemperatureSensors();
+    refreshTemperatureFromO2Sensor();
+    //refreshTemperatureFromCO2Sensor();
 
-
+    #ifdef DEBUG_MODE
+        Serial.print("Temperature from O2: "); Serial.println(tempFromO2Sensor);
+        Serial.print("Temperature from CO2: "); Serial.println(tempFromCO2Sensor);
+    #endif
+    //delay(1);
 }
 
 void receiveEvent(int howMany) {
@@ -96,17 +111,23 @@ void receiveEvent(int howMany) {
     while (0 < Wire.available()) {
         c = Wire.read();
     }
-    if (c == 'A') {
+    if (c == 'A') {//Request temperature and gases data
         stateRequest = 2;
-    }else if(c == 'L') {
+    }else if(c == 'D') {//Set lights off
         stateRequest = 10;
+    }else if(c == 'N') {//Set lights on
+        stateRequest = 11;
+    }else if(c == 'C') {//For check connection
+        stateRequest = 0;
+    }else if(c == 'F') {//Future version, getting temperature values from O2 and CO2 sensors
+        stateRequest = 15;
     }
 }
 
 void requestEvent() {
     char stringBuffer[8];
     if (stateRequest == 0) {
-
+        Wire.write("ok");
     } else if (stateRequest == 1) {
 
     } else if (stateRequest == 2) {
@@ -117,33 +138,46 @@ void requestEvent() {
         digitalWrite(LED_BUILTIN, HIGH);
 
         for (int i = 0; i < 3; i++) {
-            Wire.write(floatToString2(stringBuffer, temperatureValues[i], precision,
-            sizeOfNumberInString, false));
+            Wire.write(floatToString2(stringBuffer, temperatureValues[i], precision, sizeOfNumberInString, false));
             Wire.write(',');
         }
         Wire.write(floatToString2(stringBuffer, CO2ppm, precision, sizeOfNumberInString, false));
         Wire.write(',');
         Wire.write(floatToString2(stringBuffer, O2ppm, precision, sizeOfNumberInString, false));
         digitalWrite(LED_BUILTIN, LOW);
+    } else if (stateRequest == 10) {
+        setMeshTwoColors(pixels.Color(255, 0, 0), pixels.Color(0, 0, 255));
+        Wire.write("ok");
+    } else if (stateRequest == 11) {
+        setMeshTwoColors(pixels.Color(0, 0, 0), pixels.Color(0, 0, 0));
+        Wire.write("ok");
+    } else if (stateRequest == 15) {
+        int precision = 2;
+        int sizeOfNumberInString = 8;
+        digitalWrite(LED_BUILTIN, HIGH);
+        Wire.write(floatToString2(stringBuffer, tempFromO2Sensor, precision, sizeOfNumberInString, false));
+        Wire.write(',');
+        Wire.write(floatToString2(stringBuffer, tempFromCO2Sensor, precision, sizeOfNumberInString, false));
+        digitalWrite(LED_BUILTIN, LOW);
+
     }
 }
 
 void refreshO2AndC02() {
     // Refresh current value of CO2 and O2
-    Serial1.write("%\r\n");
-    String rawO2 = Serial1.readString();
-    Serial1.flush();
+    o2Sensor.write("%\r\n");
+    String rawO2 = o2Sensor.readString();
+    o2Sensor.flush();
     String o2String = rawO2.substring(2, 8);
 
     #ifdef DEBUG_MODE
     Serial.println("Raw o2: " + rawO2);
     #endif
     // Invertido
-    CO2ppm = o2String.toFloat();
 
-    Serial2.write("z\r\n");
-    String rawCO2 = Serial2.readString();
-    Serial2.flush();
+    co2Sensor.write("z\r\n");
+    String rawCO2 = co2Sensor.readString();
+    co2Sensor.flush();
 
     String co2String = rawCO2.substring(2, 8);
 
@@ -151,7 +185,8 @@ void refreshO2AndC02() {
     Serial.println("Raw co2: " + rawCO2);
     #endif
     // Invertido
-    O2ppm = (co2String.toFloat()) / 100.0;
+    CO2ppm = (co2String.toFloat()) / 100.0;
+    O2ppm = o2String.toFloat();
 
     // float co2Random = random(50,100);
     // float o2Random = random(5,100-co2Random);
@@ -316,14 +351,14 @@ char *floatToString2(char *outstr, float value, int places, int minwidth, bool r
 
 
 void setAllLightsWithColor(int color) {
-    for (int i=0;i<30;i++) {
+    for (int i=0;i<NUMPIXELS;i++) {
         pixels.setPixelColor(i, color);
     }
     pixels.show();
 }
 
 void setMeshTwoColors(int color1, int color2) {
-    for (int i=0;i<30;i++) {
+    for (int i=0;i<NUMPIXELS;i++) {
         if (i%2 == 0) {
             pixels.setPixelColor(i, color1);
         } else {
@@ -334,4 +369,45 @@ void setMeshTwoColors(int color1, int color2) {
 }
 void setBrightness(int bright) {
     pixels.setBrightness(bright);
+}
+
+
+void refreshTemperatureFromO2Sensor() {
+    //Form of response; "T yxx.x\r\n"
+    o2Sensor.write("T\r\n");
+    String rawTemperature = o2Sensor.readString();
+    o2Sensor.flush();
+
+    #ifdef DEBUG_MODE
+    Serial.println("Raw temperature from o2 sensor: " + rawTemperature);
+    #endif
+
+    String temperatureString = rawTemperature.substring(2, 8);
+    tempFromO2Sensor = temperatureString.toFloat();
+}
+
+void refreshTemperatureFromCO2Sensor() {
+
+    //Form of response : T #####\r\n
+    co2Sensor.write("T\r\n");
+    String rawTemperature = o2Sensor.readString();
+    co2Sensor.flush();
+
+    #ifdef DEBUG_MODE
+    Serial.println("Raw temperature from co2 sensor: " + rawTemperature);
+    #endif
+
+    String temperatureString = rawTemperature.substring(2, 8);
+    float rawFloatTemp = temperatureString.toFloat();
+    tempFromCO2Sensor = (rawFloatTemp - 1000)/10.0; //From datasheet
+
+
+}
+
+void refreshHumidityFromCO2Sensor() {
+
+}
+
+void refreshPressureFromCO2Sensor() {
+
 }
