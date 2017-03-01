@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_control_system"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingTop="6dp"
+    android:orientation="horizontal"
+    tools:context="com.freerider.chimpcode.potatoonmars.ControlSystem"
+    android:weightSum="1">
+
+
+    <!-- VISUALISATION LAYOUT -->
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_weight="0.16">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:layout_weight="0.63">
+
+
+            <ImageView
+                android:layout_height="match_parent"
+                app:srcCompat="@drawable/ic_thermometer"
+                android:id="@+id/imageView"
+                android:layout_width="69dp"
+                android:padding="0dp"
+                android:layout_margin="0dp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <TextView
+                    android:text="GROUND TEMPERATURE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView2"
+                    android:textAlignment="center"
+                    android:textStyle="normal|bold"
+                    android:layout_weight="0.54"
+                    android:gravity="center_vertical|center_horizontal" />
+
+                <TextView
+                    android:text="loading..."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtGroundTemp"
+                    android:textAlignment="center"
+                    android:gravity="center_vertical|center_horizontal" />
+
+                <TextView
+                    android:text="AMBIENT TEMPERATURE"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView4"
+                    android:textStyle="normal|bold"
+                    android:textAlignment="center"
+                    android:layout_weight="0.48"
+                    android:gravity="center_vertical|center_horizontal" />
+
+                <TextView
+                    android:text="loading..."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtAmbientTemp"
+                    android:textAlignment="center"
+                    android:gravity="center_vertical|center_horizontal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.01">
+
+            <ImageView
+                android:layout_height="59dp"
+                app:srcCompat="@drawable/ic_co2_1"
+                android:id="@+id/imageView"
+                android:layout_width="69dp"
+                android:padding="0dp"
+                android:layout_margin="0dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.1">
+                <TextView
+                    android:text="% CO2 "
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:id="@+id/textView6"
+                    android:textAlignment="center"
+                    android:textStyle="normal|bold"
+                    android:gravity="center_vertical|center_horizontal|center" />
+
+                <TextView
+                    android:text="loading..."
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:id="@+id/txtCO2Value"
+                    android:gravity="center_vertical|center" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.01">
+
+            <ImageView
+                android:layout_height="59dp"
+                app:srcCompat="@drawable/ic_oxygen"
+                android:id="@+id/imageView"
+                android:layout_width="69dp"
+                android:padding="0dp"
+                android:layout_margin="0dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.1">
+                <TextView
+                    android:text="% O2"
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:id="@+id/textView6"
+                    android:textAlignment="center"
+                    android:textStyle="normal|bold"
+                    android:gravity="center_vertical|center_horizontal|center" />
+
+                <TextView
+                    android:text="loading..."
+                    android:layout_width="match_parent"
+                    android:layout_height="37dp"
+                    android:id="@+id/txtO2Value"
+                    android:gravity="center_vertical|center" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="0.01">
+
+            <ImageView
+                android:layout_height="34dp"
+                app:srcCompat="@drawable/ic_calendar"
+                android:id="@+id/imageView"
+                android:layout_width="69dp"
+                android:padding="0dp"
+                android:layout_margin="0dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="0.1">
+                <TextView
+                    android:text="CURRENT HOUR"
+                    android:layout_width="match_parent"
+                    android:layout_height="27dp"
+                    android:id="@+id/textView6"
+                    android:textAlignment="center"
+                    android:textStyle="normal|bold"
+                    android:gravity="center_vertical|center_horizontal|center" />
+
+                <TextView
+                    android:text="loading..."
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtDateValue"
+                    android:gravity="center_vertical|center" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:orientation="vertical"
+            android:weightSum="1">
+
+
+            <TextView
+                android:text="CURRENT STATE"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8"
+                android:textStyle="normal|bold"
+                android:textAlignment="center"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:layout_weight="0.24" />
+
+            <ImageView
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_sky"
+                android:id="@+id/imgCurrentDate"
+                android:layout_width="match_parent"
+                android:padding="0dp"
+                android:layout_margin="0dp"
+                android:layout_weight="0.51" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- DEBUG LAYOUT -->
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="0.35"
+        android:showDividers="beginning|end"
+        android:background="@color/md_btn_selected_dark">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="DEBUG CONSOLE"
+                android:layout_width="match_parent"
+                android:layout_height="39dp"
+                android:id="@+id/textView10"
+                android:gravity="center_vertical|center_horizontal|center"
+                android:textStyle="normal|bold" />
+
+            <ImageView
+                android:layout_height="55dp"
+                app:srcCompat="@drawable/ic_console"
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:padding="0dp"
+                android:layout_margin="0dp" />
+
+            <TextView
+                android:text="Debug..."
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/txtDebugConsole" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- CONTROL LAYOUT -->
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0.15"
+            android:weightSum="1">
+
+            <TextView
+                android:text="VALVES CONTROL"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:id="@+id/textView11"
+                android:textStyle="normal|bold"
+                android:textAlignment="center"
+                android:gravity="center_vertical|center_horizontal|center" />
+
+            <ImageView
+                android:layout_height="43dp"
+                app:srcCompat="@drawable/ic_valve"
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:padding="0dp"
+                android:layout_margin="0dp" />
+
+            <Switch
+                android:text="O2 Valve"
+                android:layout_width="match_parent"
+                android:id="@+id/swtO2Valve"
+                android:layout_height="wrap_content" />
+
+            <Switch
+                android:text="Vacuum Valve"
+                android:layout_width="match_parent"
+                android:id="@+id/swtVacuumValve"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.09" />
+
+            <Switch
+                android:text="CO2 Valve"
+                android:layout_width="match_parent"
+                android:id="@+id/swtCO2Valve"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="COOLING SYSTEM"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:id="@+id/textView11"
+                android:textStyle="normal|bold"
+                android:textAlignment="center"
+                android:gravity="center_vertical|center_horizontal|center" />
+
+            <ImageView
+                android:layout_height="49dp"
+                app:srcCompat="@drawable/ic_fan"
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:padding="0dp"
+                android:layout_margin="0dp" />
+
+            <Switch
+                android:text=" Cooling system"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/swtCoolingSystem" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="VACUUM SYSTEM"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:id="@+id/textView11"
+                android:textStyle="normal|bold"
+                android:textAlignment="center"
+                android:gravity="center_vertical|center_horizontal|center" />
+
+            <ImageView
+                android:layout_height="49dp"
+                app:srcCompat="@drawable/ic_gauge"
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:padding="0dp"
+                android:layout_margin="0dp" />
+
+            <Switch
+                android:text="Vacuum system"
+                android:layout_width="match_parent"
+                android:id="@+id/swtVacuumSystem"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:layout_weight="0.37"
+        android:layout_marginLeft="10dp">
+
+        <TextView
+            android:text="FROM FUTURE"
+            android:layout_width="match_parent"
+            android:layout_height="33dp"
+            android:id="@+id/textView"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:gravity="center_vertical|center_horizontal|center"
+            android:layout_weight="0.02" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_bionic_contact_lens"
+            android:id="@+id/imageView2"
+            android:layout_weight="0.20" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.10" />
+
+        <TextView
+            android:text="CO2 TEMP"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:id="@+id/textView9"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:gravity="center_vertical|center_horizontal" />
+
+        <TextView
+            android:text="loading..."
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:id="@+id/txtCO2Temp"
+            android:gravity="center_vertical|center" />
+
+        <TextView
+            android:text="O2 TEMP"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:id="@+id/textView14"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="0.02" />
+
+        <TextView
+            android:text="loading..."
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:id="@+id/txtO2Temp"
+            android:gravity="center_vertical|center"
+            android:layout_weight="0.02" />
+
+        <TextView
+            android:text="CO2 HUMIDITY"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:id="@+id/textView16"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="0.02" />
+
+        <TextView
+            android:text="loading..."
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:id="@+id/txtCO2Humidity"
+            android:gravity="center_vertical|center"
+            android:layout_weight="0.02" />
+
+        <TextView
+            android:text="O2 PRESSURE"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:id="@+id/textView18"
+            android:textStyle="normal|bold"
+            android:textAlignment="center"
+            android:gravity="center_vertical|center_horizontal"
+            android:layout_weight="0.02" />
+
+        <TextView
+            android:text="loading..."
+            android:layout_width="match_parent"
+            android:layout_height="27dp"
+            android:id="@+id/txtO2Pressure"
+            android:gravity="center_vertical|center"
+            android:layout_weight="0.02" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.17" />
+
+        <Button
+            android:text="System reset"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSoftwareReset"
+            android:layout_weight="0.02" />
+
+        <Button
+            android:text="RUN CONTROL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnControl"
+            android:layout_weight="0.02" />
+
+    </LinearLayout>
+
+</LinearLayout>
